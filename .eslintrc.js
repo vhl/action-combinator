@@ -6,10 +6,28 @@ module.exports = {
   'extends': [
     'google',
   ],
+  'parser': '@typescript-eslint/parser',
   'parserOptions': {
     'ecmaVersion': 12,
     'sourceType': 'module',
   },
   'rules': {
   },
+  'overrides': [
+    {
+      files: ['**/*spec.js'],
+      env: {
+        jest: true,
+      },
+      rules: {
+        'indent': [
+          'error', 2, {
+            'CallExpression': {
+              'arguments': 1,
+            },
+          },
+        ],
+      },
+    },
+  ],
 };
