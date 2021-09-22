@@ -2,7 +2,8 @@
  * @typedef {import('interfaces').Action} Action
  */
 
-/** Convert an action to a promise.
+/**
+ * Convert an action to a promise.
  *
  * Here, we decorate an action, associating it with a promise that allows
  * it to let us know when it has finished running. An action therefore can
@@ -21,9 +22,8 @@
  *                            The function must first be converted into an
  *                            action through the instantly method defined
  *                            here.
- *
- * @return {Promise<void>} - A promise object to be resolved on completion
- *                          of the action.
+ * @return {Promise<void>} A promise object to be resolved on completion
+ *                         of the action.
  */
 function actionToPromise(action) {
   if (typeof action !== 'function') {
@@ -33,10 +33,11 @@ function actionToPromise(action) {
   return new Promise((resolve) => action(() => resolve()));
 }
 
-/** Convert a function into an ActionCombnator action that runs
+/**
+ * Convert a function into an ActionCombinator action that runs
  * and then immediately calls the continuation.
  *
- * @param {Function} func - A JS function that optionally accepts a parameter.
+ * @param {Function} func - A function that optionally accepts parameters.
  * @param {...any} args - arguments to pass to `func`
  * @return {Action} An action.
  */

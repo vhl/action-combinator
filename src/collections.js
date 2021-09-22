@@ -10,7 +10,8 @@ import {
  * @typedef {import('interfaces').Predicate} Predicate
  */
 
-/** Create an action that runs several actions at once and resolves as soon
+/**
+ * Create an action that runs several actions at once and resolves as soon
  * as any one of the actions resolves.
  *
  * NOTE: once its actions have started, this action is not responsible for
@@ -18,10 +19,7 @@ import {
  * files at once and you want them all to stop when the first one stops,
  * this action doesn't provide for that. Caveat programmator!
  *
- * @param {...Action} actions - An action.
- *                              The #any action accepts an arbitrary number of
- *                              action arguments.
- *
+ * @param {...Action} actions - An arbitrary number of action arguments.
  * @return {Action} An action.
  *                  The action runs all of the actions passed in as
  *                  arguments and resolves with the first action
@@ -37,11 +35,11 @@ function any(...actions) {
   };
 }
 
-/** Run several actions serially. It waits for the previous action to be
+/**
+ * Run several actions serially. It waits for the previous action to be
  * resolved before running the next one.
  *
- * @param {...Action} args - Any of _n_ actions to be run in sequence.
- *
+ * @param {...Action} args - An arbitrary number of actions to run serially.
  * @return {Action} An action.
  */
 function sequence(...args) {
@@ -67,14 +65,15 @@ function sequence(...args) {
   return args.reduce(inOrder);
 }
 
-/** Run several actions concurrently.
+/**
+ * Run several actions concurrently.
  * Resolve when all actions have been resolved regardless of the order
  * in which the actions are resolved.
  *
- * @param {...Action} args - Any of _n_ actions to be run concurrently.
+ * @param {...Action} args - An arbitrary number of actions to run concurrently.
  *
  *
- * @return {Action}         - An action.
+ * @return {Action} An action.
  */
 function together(...args) {
   /**
