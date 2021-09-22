@@ -1,14 +1,22 @@
+/**
+ * @typedef {import('interfaces').Action} Action
+ */
+
+/**
+ * @typedef {import('interfaces').Predicate} Predicate
+ */
+
 /** Create an action that chooses one of two actions to run, depending on
  * a predicate applied to the seed value.
  *
- * @param {function} predicate  A function that returns either true or
+ * @param {Predicate} predicate  A function that returns either true or
  *                              false.
- * @param {action}   consequent An action that will run if the predicate
+ * @param {Action}   consequent An action that will run if the predicate
  *                              returns true.
- * @param {action}   alternate  An action that will run if the predicate
+ * @param {Action}   alternate  An action that will run if the predicate
  *                              returns false.
  *
- * @return {action}            An action.
+ * @return {Action}            An action.
  */
 function branch(predicate, consequent, alternate) {
   return (resolve) => {
@@ -20,7 +28,7 @@ function branch(predicate, consequent, alternate) {
 /** Resolve immediately. Can be used to cut out a branch early, for
  * example.
  *
- * @param {function} resolve The `resolve` callback from a Promise object.
+ * @param {Function} resolve - The `resolve` callback from a Promise object.
  */
 function doNothing(resolve) {
   resolve();
@@ -29,9 +37,10 @@ function doNothing(resolve) {
 /**
  * It negates the result that is returned by the predicate.
  *
- * @param {function} predicate - Function that its result is negated.
+ * @param {Predicate} predicate - Function that its result is negated.
+ * @param {...any} args - Arguments to be passed to the predicate.
  *
- * @return {boolean}           - Result negated of predicate.
+ * @return {Predicate}           - Result negated of predicate.
  */
 function negate(predicate, ...args) {
   return () => {
@@ -42,11 +51,11 @@ function negate(predicate, ...args) {
 /** Create an action that repeats the provided action while
  * the predicate is true.
  *
- * @param {function} predicate A function that returns true or false.
+ * @param {Predicate} predicate A function that returns true or false.
  *
- * @param {action} action      The action to be repeated.
+ * @param {Action} action      The action to be repeated.
  *
- * @return {action}            An action.
+ * @return {Action}            An action.
  *                             The action runs the provided action while
  *                             predicate() is true.
  */
@@ -70,11 +79,11 @@ function repeatWhile(predicate, action) {
 /** Create an action that repeats the provided action until
  * the predicate is true.
  *
- * @param {function} predicate A function that returns true or false.
+ * @param {Predicate} predicate A function that returns true or false.
  *
- * @param {action} action      The action to be repeated.
+ * @param {Action} action      The action to be repeated.
  *
- * @return {action}            An action.
+ * @return {Action}            An action.
  *                             The action runs the provided action until
  *                             predicate() is true.
  */
@@ -86,11 +95,11 @@ function repeatUntil(predicate, action) {
  * it does nothing.
  * It's the opposite of the when method.
  *
- * @param {function} predicate  A function that returns true or false.
+ * @param {Predicate} predicate  A function that returns true or false.
  *
- * @param {action} action       The action to be run.
+ * @param {Action} action       The action to be run.
  *
- * @return {action}            An action.
+ * @return {Action}            An action.
  */
 function unless(predicate, action) {
   return branch(predicate, doNothing, action);
@@ -101,11 +110,11 @@ function unless(predicate, action) {
  *
  * It is a composition of branch() and doNothing().
  *
- * @param {function} predicate  A function that returns true or false.
+ * @param {Predicate} predicate  A function that returns true or false.
  *
- * @param {action} action       The action to be run.
+ * @param {Action} action       The action to be run.
  *
- * @return {action}            An action.
+ * @return {Action}            An action.
  */
 function when(predicate, action) {
   return branch(predicate, action, doNothing);

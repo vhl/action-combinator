@@ -3,8 +3,15 @@ import {
   instantly,
 } from 'core';
 
+/**
+ * @typedef {import('interfaces').Action} Action
+ */
+
 describe('core methods', () => {
+  /** @type {Action} */
   let action1;
+
+  /** @type {jest.Mock} */
   let myFunc;
 
   beforeEach(() => {
@@ -21,6 +28,7 @@ describe('core methods', () => {
     it('throws a TypeError if action is not a function', () => {
       const notFunctionThing = 5;
       const runAction = () => {
+        // @ts-ignore: Purposely passing arg of wrong type to test error
         actionToPromise(notFunctionThing);
       };
       expect(runAction).toThrow(TypeError);
@@ -28,12 +36,11 @@ describe('core methods', () => {
   });
 
   describe('#instantly', () => {
-    /* eslint-disable indent */
     describe('given a function', () => {
       it(
         `
-        returns an action that runs the given function
-        and the callback passed to it
+          returns an action that runs the given function
+          and the callback passed to it
         `,
         () => {
           const func1 = jest.fn();
@@ -45,6 +52,5 @@ describe('core methods', () => {
         },
       );
     });
-    /* eslint-enable indent */
   });
 });

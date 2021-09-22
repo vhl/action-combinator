@@ -11,13 +11,34 @@ import {
   when,
 } from 'control_structures';
 
+/**
+ * @typedef {import('interfaces').Action} Action
+ */
+
+/**
+ * @typedef {import('interfaces').Predicate} Predicate
+ */
+
 describe('control structures', () => {
+  /** @type {jest.Mock} */
   let alternateSpy;
+
+  /** @type {Action} */
   let alternate;
+
+  /** @type {Action} */
   let consequent;
+
+  /** @type {jest.Mock} */
   let consequentSpy;
+
+  /** @type {Action} */
   let myBranch;
+
+  /** @type {Predicate} */
   let predicate;
+
+  /** @type {number} */
   let value;
 
   beforeEach(() => {
@@ -76,8 +97,13 @@ describe('control structures', () => {
   });
 
   describe('For looping', () => {
+    /** @type {Action} */
     let action;
 
+    /**
+     * @param {number} addend - number to add to value
+     * @return {Action} action that adds addend to value
+     */
     function addValue(addend) {
       return instantly(() => {
         value += addend;

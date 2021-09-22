@@ -99,6 +99,7 @@
   },
   "exclude": [
     "babel.config.js",
+    "dist",
     "jest.config.js",
     "node_modules",
     "public/js_coverage",

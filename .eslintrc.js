@@ -15,10 +15,7 @@ module.exports = {
   },
   'overrides': [
     {
-      files: ['**/*spec.js'],
-      env: {
-        jest: true,
-      },
+      files: ['**/*.js'],
       rules: {
         'indent': [
           'error', 2, {
@@ -27,6 +24,12 @@ module.exports = {
             },
           },
         ],
+      },
+    },
+    {
+      files: ['**/*spec.js'],
+      env: {
+        jest: true,
       },
     },
   ],

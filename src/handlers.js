@@ -1,16 +1,20 @@
 import $ from 'jquery';
 
+/**
+ * @typedef {import('interfaces').Action} Action
+ */
+
 /** Create an action that adds a given handler for a given event to
  * elements matching a given selector. AddHandler is not resolved until the
  * event occurs.
  *
- * @param {String} selector  A selector for the element(s) to add an event
+ * @param {string} selector  A selector for the element(s) to add an event
  *                           listener to.
- * @param {String} event     The event name for the event listener.
+ * @param {string} event     The event name for the event listener.
  * @param {Function} handler The "handler" for the event: actually, it will be
  *                           wrapped by the function that is returned by
  *                           addHandler.
- * @return {Function}        An action that binds the event to an anonymous
+ * @return {Action}        An action that binds the event to an anonymous
  *                           function. The anonymous function calls `handler`,
  *                           then resolves.
  */
@@ -30,10 +34,10 @@ function addHandler(selector, event, handler) {
 /** Create an action that removes handlers for a given event from elements
  * matching a given selector.
  *
- * @param {String} selector  A selector for the element(s) from which to remove
+ * @param {string} selector  A selector for the element(s) from which to remove
  *                           the event listener.
- * @param {String} event     The event name for the event listener.
- * @return {Function}        An action that removes handlers for the event
+ * @param {string} event     The event name for the event listener.
+ * @return {Action}        An action that removes handlers for the event
  *                           from elements matching the selector, then
  *                           resolves.
  */
@@ -47,12 +51,12 @@ function removeHandler(selector, event) {
 
 /** Create an action that adds a given click handler to elements matching
  * a given selector.
- * @param {String} selector  A selector for the element(s) to add the 'click'
+ * @param {string} selector  A selector for the element(s) to add the 'click'
  *                           event listener to.
  * @param {Function} handler The "handler" for the event: actually, it will be
  *                           wrapped by the function that is returned by
  *                           clickHandler.
- * @return {Function}        An action that binds the event to an anonymous
+ * @return {Action}          An action that binds the event to an anonymous
  *                           function. The anonymous function calls `handler`,
  *                           then resolves.
  */

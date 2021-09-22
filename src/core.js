@@ -1,3 +1,7 @@
+/**
+ * @typedef {import('interfaces').Action} Action
+ */
+
 /** Convert an action to a promise.
  *
  * Here, we decorate an action, associating it with a promise that allows
@@ -8,18 +12,18 @@
  * `actionToPromise` call is the "prime mover" that causes it to be
  * executed.
  *
- * @param {function} action  - A function that accepts a continuation and an
- *                             initial value.
- *                             The action must call resolve(),
- *                             optionally passing it a value that will be
- *                             returned when the promise resolves.
+ * @param {Action} action - A function that accepts a continuation and an
+ *                            initial value.
+ *                            The action must call resolve(),
+ *                            optionally passing it a value that will be
+ *                            returned when the promise resolves.
  *
- *                             The function must first be converted into an
- *                             action through the instantly method defined
- *                             here.
+ *                            The function must first be converted into an
+ *                            action through the instantly method defined
+ *                            here.
  *
- * @return {Promise}        - A promise object to be resolved on completion
- *                             of the action.
+ * @return {Promise<void>} - A promise object to be resolved on completion
+ *                          of the action.
  */
 function actionToPromise(action) {
   if (typeof action !== 'function') {
@@ -32,9 +36,9 @@ function actionToPromise(action) {
 /** Convert a function into an ActionCombnator action that runs
  * and then immediately calls the continuation.
  *
- * @param {function} func - A JS function that optionally accepts a parameter.
- *
- * @return {action}      -  An action.
+ * @param {Function} func - A JS function that optionally accepts a parameter.
+ * @param {...any} args - arguments to pass to `func`
+ * @return {Action} An action.
  */
 function instantly(func, ...args) {
   return (resolve) => {

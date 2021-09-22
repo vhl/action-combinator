@@ -1,16 +1,20 @@
 import {
   sequence,
-} from 'collections';
+} from './collections';
+
+/**
+ * @typedef {import('interfaces').Action} Action
+ */
 
 /** Create an action that waits for given amount of time,
  * then runs the action. This is simply a composition of #wait and another
  * action
  *
- * @param {action} action   An action to be run after the given duration.
+ * @param {Action} action   An action to be run after the given duration.
  * @param {Number} duration The amount of time, in milliseconds, to wait
  *                          before proceeding to the action.
  *
- * @return {action}        An action.
+ * @return {Action}        An action.
  */
 function delay(action, duration) {
   return sequence(wait(duration), action);
@@ -22,7 +26,7 @@ function delay(action, duration) {
  * @param {Number} duration The amount of time, in milliseconds, to wait
  *                          before resolving.
  *
- * @return {action}        An action.
+ * @return {Action}        An action.
  */
 function wait(duration) {
   return (resolve) => {

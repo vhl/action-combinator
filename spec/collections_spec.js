@@ -14,9 +14,18 @@ import {
   together,
 } from 'collections';
 
+/**
+ * @typedef {import('interfaces').Action} Action
+ */
+
 describe('operations on collections of actions', () => {
+  /** @type {Action} */
   let action1;
+
+  /** @type {jest.Mock} */
   let myFunc;
+
+  /** @type {string} */
   let value;
 
   beforeEach(() => {
@@ -25,9 +34,18 @@ describe('operations on collections of actions', () => {
   });
 
   describe('#any', () => {
+    /** @type {Action} */
     let delay1;
+
+    /** @type {Action} */
     let delay2;
 
+    /**
+     * Return an action, suitable for chaining, that assigns the given arg to
+     * `value`.
+     * @param {string} arg - The string value to assign to `value`
+     * @return {Action} An action that assigns the given string to `value`.
+     */
     function setValue(arg) {
       return instantly(() => {
         value = arg;
@@ -67,48 +85,38 @@ describe('operations on collections of actions', () => {
   });
 
   describe('#sequence', () => {
-    it('handles one action', () => {
-      let stringSequence;
-      const appendString = (stringToAppend) => {
-        return instantly(() => stringSequence += stringToAppend);
-      };
+    /** @type {string} */
+    let stringSequence;
 
+    /**
+     * Append a string to stringSequence.
+     * @param {string} stringToAppend
+     * @return {Action} an action that appends the string
+     */
+    function appendString(stringToAppend) {
+      return instantly(() => stringSequence += stringToAppend);
+    };
+
+    beforeEach(() => {
       stringSequence = '';
+    });
 
-      /* eslint-disable indent */
+    it('handles one action', () => {
       actionToPromise(
         appendString('1'),
       ).then(() => expect(stringSequence).toEqual('1'));
-      /* eslint-enable indent */
     });
 
     it('handles two actions', () => {
-      let stringSequence;
-      const appendString = (stringToAppend) => {
-        return instantly(() => stringSequence += stringToAppend);
-      };
-
-      stringSequence = '';
-
-      /* eslint-disable indent */
       actionToPromise(
         sequence(
           appendString('1'),
           appendString('2'),
         ),
       ).then(() => expect(stringSequence).toEqual('12'));
-      /* eslint-enable indent */
     });
 
     it('handles three actions', () => {
-      let stringSequence;
-      const appendString = (stringToAppend) => {
-        return instantly(() => stringSequence += stringToAppend);
-      };
-
-      stringSequence = '';
-
-      /* eslint-disable indent */
       actionToPromise(
         sequence(
           appendString('1'),
@@ -116,11 +124,11 @@ describe('operations on collections of actions', () => {
           appendString('3'),
         ),
       ).then(() => expect(stringSequence).toEqual('123'));
-      /* eslint-enable indent */
     });
 
     it('throws a TypeError if one of the actions is not a function', () => {
       const runActionSerially = () => {
+        // @ts-ignore: Purposely passing arg of wrong type to test error
         actionToPromise(sequence(5));
       };
       expect(runActionSerially).toThrow();
@@ -129,26 +137,44 @@ describe('operations on collections of actions', () => {
 
   describe('#together', () => {
     it('handles one action', () => {
+      /** @type {Action} */
       const myFuncAndNothing = together(action1);
+
       run(myFuncAndNothing);
       expect(myFunc).toHaveBeenCalled();
     });
 
     it('handles two actions', () => {
+      /** @type {jest.Mock} */
       const mySecondFunc = jest.fn();
+
+      /** @type {Action} */
       const action2 = instantly(mySecondFunc);
+
+      /** @type {Action} */
       const putThemTogether = together(action1, action2);
+
       run(putThemTogether);
       expect(myFunc).toHaveBeenCalled();
       expect(mySecondFunc).toHaveBeenCalled();
     });
 
     it('handles three actions', () => {
+      /** @type {jest.Mock} */
       const mySecondFunc = jest.fn();
+
+      /** @type {jest.Mock} */
       const myThirdFunc = jest.fn();
+
+      /** @type {Action} */
       const action2 = instantly(mySecondFunc);
+
+      /** @type {Action} */
       const action3 = instantly(myThirdFunc);
+
+      /** @type {Action} */
       const putThemTogether = together(action1, action2, action3);
+
       run(putThemTogether);
       expect(myFunc).toHaveBeenCalled();
       expect(mySecondFunc).toHaveBeenCalled();
@@ -158,15 +184,23 @@ describe('operations on collections of actions', () => {
     it('resolves when all actions have been resolved', () => {
       let container = 0;
 
-      const myIncrementBy = (value) => {
+      /**
+       * @param {number} value - Value to add to container
+       * @return {Action} action that adds value to container
+       */
+      function myIncrementBy(value) {
         return instantly((() => container += value));
       };
 
-      const myDecrementBy = (value) => {
+      /**
+       * @param {number} value - Value to subtract from container
+       * @return {Action} action that subtracts value from container
+       */
+      function myDecrementBy(value) {
         return instantly((() => container -= value));
       };
 
-      /* eslint-disable indent */
+      /** @type {Action} */
       const togetherAction = together(
         sequence(
           myIncrementBy(2), // 0 + 2
@@ -178,7 +212,6 @@ describe('operations on collections of actions', () => {
         myDecrementBy(0), // Another noop
         delay(myIncrementBy(2), 500), // wait 100, then container + 2
       );
-      /* eslint-enable indent */
 
       const expectation = actionToPromise(togetherAction);
 
@@ -193,6 +226,7 @@ describe('operations on collections of actions', () => {
 
     it('throws a TypeError if one of the actions is not a function', () => {
       const runActionTogether = () => {
+        // @ts-ignore: Purposely passing arg of wrong type to test error
         actionToPromise(together(5));
       };
       expect(runActionTogether).toThrow(TypeError);

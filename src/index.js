@@ -2,7 +2,7 @@ export {
   any,
   sequence,
   together,
-} from 'collections';
+} from './collections';
 
 export {
   branch,
@@ -10,20 +10,20 @@ export {
   repeatWhile,
   unless,
   when,
-} from 'control_structures';
+} from './control_structures';
 
 export {
   actionToPromise,
   instantly,
-} from 'core';
+} from './core';
 
 export {
   addHandler,
   clickHandler,
   removeHandler,
-} from 'handlers';
+} from './handlers';
 
 export {
   delay,
   wait,
-} from 'timing';
+} from './timing';
