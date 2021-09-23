@@ -2,7 +2,7 @@
   "name": "action-combinator",
   "version": "1.0.0",
   "description": "Functional programming library",
-  "main": "src/index.js",
+  "main": "dist/app.bundle.js",
   "scripts": {
     "prepare": "npm run co:login",
     "co:login": "aws codeartifact login --tool npm --repository nodejs-repo --domain nodejs",
