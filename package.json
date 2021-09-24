@@ -1,8 +1,8 @@
 {
   "name": "action-combinator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Functional programming library",
-  "main": "src/index.js",
+  "main": "dist/app.bundle.js",
   "scripts": {
     "test": "jest --env=jsdom",
     "tsc": "node ./node_modules/.bin/tsc",

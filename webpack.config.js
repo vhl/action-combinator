@@ -18,8 +18,14 @@ module.exports = (env, argv) => {
   // final output before the script finishes.
   const config = {
     entry: './src/index.js',
+    experiments: {
+      outputModule: true,
+    },
     output: {
       filename: outputFileName,
+      library: {
+        type: 'module',
+      },
       path: path.resolve(__dirname, 'dist'),
     },
     resolve: {
