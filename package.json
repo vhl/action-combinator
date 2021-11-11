@@ -17,6 +17,7 @@
     "@types/jest": "^27.0.2",
     "@types/jquery": "^3.5.6",
     "@typescript-eslint/parser": "^4.31.2",
+    "ansi-regex": "~>5.0.1",
     "babel-loader": "^8.2.2",
     "babel-plugin-dynamic-import-node": "^2.3.3",
     "babel-plugin-macros": "^3.1.0",
