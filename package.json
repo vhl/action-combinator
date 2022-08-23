@@ -31,5 +31,8 @@
   },
   "dependencies": {
     "jquery": "^3.6.0"
+  },
+  "resolutions": {
+    "terser": "^5.14.2"
   }
 }
