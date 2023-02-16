@@ -1,3 +1,5 @@
+// @tscheck
+
 export {
   any,
   sequence,

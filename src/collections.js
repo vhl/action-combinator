@@ -1,3 +1,5 @@
+// @tscheck
+
 import {
   actionToPromise,
 } from './core';

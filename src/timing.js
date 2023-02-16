@@ -1,3 +1,5 @@
+// @tscheck
+
 import {
   sequence,
 } from './collections';

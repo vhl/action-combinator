@@ -1,3 +1,5 @@
+// @ts-check
+
 /**
  * @typedef {import('interfaces').Action} Action
  */

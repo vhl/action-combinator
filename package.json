@@ -7,7 +7,8 @@
     "prepare": "npm run co:login",
     "co:login": "aws codeartifact login --tool npm --repository nodejs-repo --domain nodejs",
     "test": "jest --env=jsdom",
-    "tsc": "node ./node_modules/.bin/tsc",
+    "test:nocov": "jest --env=jsdom --coverage=false",
+    "typecheck": "node ./node_modules/.bin/tsc",
     "build": "npx tsc && npx webpack --config='./webpack.config.js' --mode='development'",
     "build:prod": "npx tsc && npx webpack --config='./webpack.config.js' --mode='production'"
   },
