@@ -5,6 +5,10 @@ import $ from 'jquery';
  */
 
 /**
+ * @deprecated This method is to be deleted when we have rewritten any uses
+ *             of it in the vocab-tutorial code that we copy from the legacy
+ *             version.
+ *
  * Create an action that adds a given handler for a given event to
  * elements matching a given selector. AddHandler is not resolved until the
  * event occurs.
@@ -33,6 +37,10 @@ function addHandler(selector, event, handler) {
 
 
 /**
+ * @deprecated This method is to be deleted when we have rewritten any uses
+ *             of it in the vocab-tutorial code that we copy from the legacy
+ *             version.
+ *
  * Create an action that removes handlers for a given event from elements
  * matching a given selector.
  *
@@ -51,6 +59,10 @@ function removeHandler(selector, event) {
 }
 
 /**
+ * @deprecated This method is to be deleted when we have rewritten any uses
+ *             of it in the vocab-tutorial code that we copy from the legacy
+ *             version.
+ *
  * Create an action that adds a given click handler to elements matching
  * a given selector.
  * @param {string} selector - A selector for the element(s) to add the 'click'
