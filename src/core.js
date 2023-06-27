@@ -27,7 +27,7 @@
  * @return {Promise<void>} A promise object to be resolved on completion
  *                         of the action.
  */
-function actionToPromise(action) {
+export function actionToPromise(action) {
   if (typeof action !== 'function') {
     throw new TypeError('Action argument is not a function');
   }
@@ -43,11 +43,9 @@ function actionToPromise(action) {
  * @param {...any} args - arguments to pass to `func`
  * @return {Action} An action.
  */
-function instantly(func, ...args) {
+export function instantly(func, ...args) {
   return (resolve) => {
     func(...args);
     resolve();
   };
 }
-
-export {actionToPromise, instantly};

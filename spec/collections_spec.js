@@ -181,7 +181,7 @@ describe('operations on collections of actions', () => {
       expect(myThirdFunc).toHaveBeenCalled();
     });
 
-    it('resolves when all actions have been resolved', () => {
+    it('resolves when all actions have been resolved', async () => {
       let container = 0;
 
       /**
@@ -213,15 +213,13 @@ describe('operations on collections of actions', () => {
         delay(myIncrementBy(2), 500), // wait 100, then container + 2
       );
 
-      const expectation = actionToPromise(togetherAction);
+      await actionToPromise(togetherAction);
 
-      return expectation.then(() => {
-        /**
-         * Since we sequentially run the actions to make 8, we can assume
-         * that the end result is going to be 10, as we add 2 to container.
-         */
-        expect(container).toEqual(10);
-      });
+      /**
+       * Since we sequentially run the actions to make 8, we can assume
+       * that the end result is going to be 10, as we add 2 to container.
+       */
+      expect(container).toEqual(10);
     });
 
     it('throws a TypeError if one of the actions is not a function', () => {

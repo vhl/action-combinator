@@ -24,7 +24,7 @@ import $ from 'jquery';
  *                  function. The anonymous function calls `handler`,
  *                  resolves.
  */
-function addHandler(selector, event, handler) {
+export function addHandler(selector, event, handler) {
   return (resolve) => {
     // We need jQuery here, because it handles pretty well the cases where the
     // event is not an standard one.
@@ -51,7 +51,7 @@ function addHandler(selector, event, handler) {
  * @return {Action} An action that removes handlers for the event from elements
  *                  matching the selector, then resolves.
  */
-function removeHandler(selector, event) {
+export function removeHandler(selector, event) {
   return (resolve) => {
     // Because we add events with jQuery, we need to remove it with jQuery too.
     $(selector).off(event);
@@ -74,12 +74,6 @@ function removeHandler(selector, event) {
  * @return {Action} An action that binds the event to an anonymous function. The
  *                  anonymous function calls `handler`, then resolves.
  */
-function clickHandler(selector, handler) {
+export function clickHandler(selector, handler) {
   return addHandler(selector, 'click', handler);
 }
-
-export {
-  addHandler,
-  clickHandler,
-  removeHandler,
-};
