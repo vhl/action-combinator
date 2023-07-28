@@ -1,14 +1,11 @@
+// @tscheck
+
 import {
   actionToPromise,
 } from './core';
 
-/**
- * @typedef {import('interfaces').Action} Action
- */
-
-/**
- * @typedef {import('interfaces').Predicate} Predicate
- */
+/** @typedef {import('interfaces').Action} Action */
+/** @typedef {import('interfaces').Predicate} Predicate */
 
 /**
  * Create an action that runs several actions at once and resolves as soon
@@ -27,6 +24,7 @@ import {
  */
 function any(...actions) {
   return (resolve) => {
+    /** @type {Promise<void>[]} */
     const promiseableActions = actions.map((action) => actionToPromise(action));
 
     Promise.race(promiseableActions).then(

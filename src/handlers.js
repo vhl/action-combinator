@@ -1,3 +1,4 @@
+// @ts-check
 import $ from 'jquery';
 
 /**
@@ -5,6 +6,10 @@ import $ from 'jquery';
  */
 
 /**
+ * @deprecated This method is to be deleted when we have rewritten any uses
+ *             of it in the vocab-tutorial code that we copy from the legacy
+ *             version.
+ *
  * Create an action that adds a given handler for a given event to
  * elements matching a given selector. AddHandler is not resolved until the
  * event occurs.
@@ -19,7 +24,7 @@ import $ from 'jquery';
  *                  function. The anonymous function calls `handler`,
  *                  resolves.
  */
-function addHandler(selector, event, handler) {
+export function addHandler(selector, event, handler) {
   return (resolve) => {
     // We need jQuery here, because it handles pretty well the cases where the
     // event is not an standard one.
@@ -33,6 +38,10 @@ function addHandler(selector, event, handler) {
 
 
 /**
+ * @deprecated This method is to be deleted when we have rewritten any uses
+ *             of it in the vocab-tutorial code that we copy from the legacy
+ *             version.
+ *
  * Create an action that removes handlers for a given event from elements
  * matching a given selector.
  *
@@ -42,7 +51,7 @@ function addHandler(selector, event, handler) {
  * @return {Action} An action that removes handlers for the event from elements
  *                  matching the selector, then resolves.
  */
-function removeHandler(selector, event) {
+export function removeHandler(selector, event) {
   return (resolve) => {
     // Because we add events with jQuery, we need to remove it with jQuery too.
     $(selector).off(event);
@@ -51,6 +60,10 @@ function removeHandler(selector, event) {
 }
 
 /**
+ * @deprecated This method is to be deleted when we have rewritten any uses
+ *             of it in the vocab-tutorial code that we copy from the legacy
+ *             version.
+ *
  * Create an action that adds a given click handler to elements matching
  * a given selector.
  * @param {string} selector - A selector for the element(s) to add the 'click'
@@ -61,12 +74,6 @@ function removeHandler(selector, event) {
  * @return {Action} An action that binds the event to an anonymous function. The
  *                  anonymous function calls `handler`, then resolves.
  */
-function clickHandler(selector, handler) {
+export function clickHandler(selector, handler) {
   return addHandler(selector, 'click', handler);
 }
-
-export {
-  addHandler,
-  clickHandler,
-  removeHandler,
-};

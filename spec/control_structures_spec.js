@@ -11,13 +11,8 @@ import {
   when,
 } from 'control_structures';
 
-/**
- * @typedef {import('interfaces').Action} Action
- */
-
-/**
- * @typedef {import('interfaces').Predicate} Predicate
- */
+/** @typedef {import('interfaces').Action} Action */
+/** @typedef {import('interfaces').Predicate} Predicate */
 
 describe('control structures', () => {
   /** @type {jest.Mock} */

@@ -1,3 +1,5 @@
+// @tscheck
+
 import {
   sequence,
 } from './collections';
@@ -15,7 +17,7 @@ import {
  *                            before proceeding to the action.
  * @return {Action} An action.
  */
-function delay(action, duration) {
+export function delay(action, duration) {
   return sequence(wait(duration), action);
 }
 
@@ -27,13 +29,8 @@ function delay(action, duration) {
  *                            before resolving.
  * @return {Action} An action.
  */
-function wait(duration) {
+export function wait(duration) {
   return (resolve) => {
     setTimeout(resolve, duration);
   };
 }
-
-export {
-  delay,
-  wait,
-};

@@ -1,10 +1,7 @@
-/**
- * @typedef {import('interfaces').Action} Action
- */
+// @ts-check
 
-/**
- * @typedef {import('interfaces').Predicate} Predicate
- */
+/** @typedef {import('interfaces').Action} Action */
+/** @typedef {import('interfaces').Predicate} Predicate */
 
 /**
  * Create an action that chooses one of two actions to run, depending on
@@ -18,7 +15,7 @@
  *                             returns false.
  * @return {Action} An action.
  */
-function branch(predicate, consequent, alternate) {
+export function branch(predicate, consequent, alternate) {
   return (resolve) => {
     const actionToExecute = predicate() ? consequent : alternate;
     actionToExecute(resolve);
@@ -56,7 +53,7 @@ function negate(predicate, ...args) {
  * @param {Action} action - The action to be repeated.
  * @return {Action} Action that runs the given action while predicate is true.
  */
-function repeatWhile(predicate, action) {
+export function repeatWhile(predicate, action) {
   // We need to return a function that might resolve, so we wrap the function
   // logic with a new arrow function that receives a resolve argument.
   return (resolve) => {
@@ -82,7 +79,7 @@ function repeatWhile(predicate, action) {
  * @param {Action} action - The action to be repeated.
  * @return {Action} Action that runs the given action until predicate is true.
  */
-function repeatUntil(predicate, action) {
+export function repeatUntil(predicate, action) {
   return repeatWhile(negate(predicate), action);
 }
 
@@ -95,7 +92,7 @@ function repeatUntil(predicate, action) {
  * @param {Action} action - The action to be run.
  * @return {Action} An action.
  */
-function unless(predicate, action) {
+export function unless(predicate, action) {
   return branch(predicate, doNothing, action);
 }
 
@@ -109,14 +106,6 @@ function unless(predicate, action) {
  * @param {Action} action - The action to be run.
  * @return {Action} An action.
  */
-function when(predicate, action) {
+export function when(predicate, action) {
   return branch(predicate, action, doNothing);
 }
-
-export {
-  branch,
-  repeatWhile,
-  repeatUntil,
-  unless,
-  when,
-};

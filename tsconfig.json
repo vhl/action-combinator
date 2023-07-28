@@ -97,12 +97,8 @@
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     // "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
   },
-  "exclude": [
-    "babel.config.js",
-    "dist",
-    "jest.config.js",
-    "node_modules",
-    "public/js_coverage",
-    "webpack.config.js",
+  "include": [
+    "src/**/*",
+    "spec/**/*",
   ]
 }
