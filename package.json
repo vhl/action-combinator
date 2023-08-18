@@ -4,8 +4,6 @@
   "description": "Functional programming library",
   "main": "dist/app.bundle.js",
   "scripts": {
-    "prepare": "npm run co:login",
-    "co:login": "aws codeartifact login --tool npm --repository nodejs-repo --domain nodejs",
     "lint": "eslint src spec",
     "test": "jest --env=jsdom",
     "test:nocov": "jest --env=jsdom --coverage=false",
