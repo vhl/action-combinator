@@ -1,11 +1,9 @@
 {
   "name": "action-combinator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Functional programming library",
-  "main": "src/index.js",
+  "main": "dist/app.bundle.js",
   "scripts": {
-    "prepare": "npm run co:login",
-    "co:login": "aws codeartifact login --tool npm --repository nodejs-repo --domain nodejs",
     "lint": "eslint src spec",
     "test": "jest --env=jsdom",
     "test:nocov": "jest --env=jsdom --coverage=false",
@@ -24,7 +22,6 @@
     "babel-loader": "^8.2.2",
     "babel-plugin-dynamic-import-node": "^2.3.3",
     "babel-plugin-macros": "^3.1.0",
-    "babel-plugin-mockable-imports": "^1.7.1",
     "eslint": "^7.32.0",
     "eslint-config-google": "^0.14.0",
     "jest": "^27.2.0",
