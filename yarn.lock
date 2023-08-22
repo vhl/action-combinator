@@ -1743,11 +1743,6 @@ babel-plugin-macros@^3.1.0:
     cosmiconfig "^7.0.0"
     resolve "^1.19.0"
 
-babel-plugin-mockable-imports@^1.7.1:
-  version "1.7.1"
-  resolved "https://registry.yarnpkg.com/babel-plugin-mockable-imports/-/babel-plugin-mockable-imports-1.7.1.tgz#8f68608a3bbe08bacf6a7bcc430a3c83514caceb"
-  integrity sha512-WuAB1CKwwlXC+/tzV3Ouu1R3MaibE4JQuR1LHYYVE0ofrEkBq6UiiR+S6+y9AV0PNoehcIOR4SKXIfbRh/YDVw==
-
 babel-plugin-polyfill-corejs2@^0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/babel-plugin-polyfill-corejs2/-/babel-plugin-polyfill-corejs2-0.2.2.tgz#e9124785e6fd94f94b618a7954e5693053bf5327"

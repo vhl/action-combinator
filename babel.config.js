@@ -68,7 +68,6 @@ module.exports = function(api) {
           async: false,
         },
       ],
-      isTestEnv && 'babel-plugin-mockable-imports',
     ].filter(Boolean),
   };
 };
